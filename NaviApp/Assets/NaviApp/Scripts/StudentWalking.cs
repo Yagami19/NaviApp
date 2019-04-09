@@ -27,14 +27,18 @@ public class StudentWalking : MonoBehaviour
     {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         NavigatorScript = Navigator.GetComponent<OnClickEvent>();
-        Target = null;
+        Target = Navigator;
         if (Navigator == null)
         {
             throw new InvalidOperationException("You Did not set proper script reference (also can be done by injecting OnClickEvent script to student)");
         }
 
 
-        isDoneMoving = true;
+        
+        
+        isDoneMoving = false;
+
+
 
     }
 
@@ -43,12 +47,28 @@ public class StudentWalking : MonoBehaviour
     void Update()
     {
 
-        if (Target!=null) 
+        if (this.transform.position.x == Target.transform.position.x && this.transform.position.z == Target.transform.position.z )
         {
-            DrawLine();
 
+            isDoneMoving = true;
+        }
+
+        else
+        {
+            isDoneMoving = false;
 
         }
+
+        if (Target != null)
+        {
+            DrawLine();
+            
+
+        }
+
+       
+      
+
 
     }
 
@@ -66,6 +86,8 @@ public class StudentWalking : MonoBehaviour
     public void StudentMove()
     {
 
+
+        // Find jest tutaj uzyty po to, aby znalezc obiekt po tekscie
         agent.speed = 3.5f; 
         Target = GameObject.Find(TargetName.text);
         Target = Target.transform.GetChild(1).gameObject;
@@ -116,13 +138,27 @@ public class StudentWalking : MonoBehaviour
 
 
 
+    public Dropdown CurrentPositionDropdown;
 
+
+    
+    public float smoothTime = 0.3F;
+    private Vector3 velocity = Vector3.zero;
 
     public void SelectedPositionUpdate()
     {
         //here is code which updates position of the navmeshagent (arrow/student) when dropdown mylocalisation is changed
 
 
+
+
+
+        var _TempCurrentPosition = GameObject.Find(CurrentPositionDropdown.options[CurrentPositionDropdown.value].text);
+        this.transform.position = _TempCurrentPosition.transform.GetChild(1).gameObject.transform.position;
+      //   agent.speed = 100.0f;
+       //  agent.SetDestination(_TempCurrentPosition.transform.GetChild(1).gameObject.transform.position);
+
+         
 
 
     }
