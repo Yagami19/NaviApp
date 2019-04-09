@@ -630,7 +630,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &179685085
 GameObject:
@@ -2381,13 +2381,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_LocalRotation: {x: 0.6213152, y: -0, z: -0, w: 0.78356075}
-  m_LocalPosition: {x: -2.61, y: 19.84, z: -6}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.33392087, y: -0.57401013, z: 0.36932492, w: 0.65008336}
+  m_LocalPosition: {x: 9.87, y: 14.89, z: -2.78}
+  m_LocalScale: {x: 0.9967962, y: 0.9377667, z: 1.1166208}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 76.824005, y: 0, z: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 59.109, y: -76.71001, z: 10.872001}
 --- !u!1 &545091023
 GameObject:
   m_ObjectHideFlags: 0
@@ -2987,7 +2987,7 @@ Transform:
   m_LocalScale: {x: 20, y: 1, z: 20}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &774419891 stripped
 Transform:
@@ -6419,7 +6419,7 @@ Transform:
   - {fileID: 1832763830}
   - {fileID: 1820615276}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1933322778 stripped
 Transform:
@@ -6958,13 +6958,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2143667604}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.017082995, y: -0.70184064, z: 0.017328287, w: 0.71191823}
   m_LocalPosition: {x: 3.34, y: 0.55, z: 5.42}
-  m_LocalScale: {x: 1, y: 0.65833, z: 1}
+  m_LocalScale: {x: 0.8479848, y: 0.65833, z: 2.8090281}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 2.788, y: -89.18201, z: 0.040000003}
 --- !u!195 &2143667609
 NavMeshAgent:
   m_ObjectHideFlags: 0
