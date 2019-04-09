@@ -115,4 +115,16 @@ public class StudentWalking : MonoBehaviour
     }
 
 
+
+
+
+    public void SelectedPositionUpdate()
+    {
+        //here is code which updates position of the navmeshagent (arrow/student) when dropdown mylocalisation is changed
+
+
+
+
+    }
+
 }
