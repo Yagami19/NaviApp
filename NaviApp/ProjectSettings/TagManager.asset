@@ -10,6 +10,7 @@ TagManager:
   - Student
   - UI
   - Background
+  - Elevator
   layers:
   - Default
   - TransparentFX
