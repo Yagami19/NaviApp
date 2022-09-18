@@ -77,7 +77,8 @@ public class StudentWalking : MonoBehaviour
     {
         agent.speed = 0.0f;
         Target = GameObject.Find(TargetName.text);
-        Target = Target.transform.GetChild(1).gameObject;
+        //to comment this line
+        Target = Target.transform.GetChild(0).gameObject;
         agent.SetDestination(Target.transform.position);
 
     }
@@ -90,7 +91,9 @@ public class StudentWalking : MonoBehaviour
         // Find jest tutaj uzyty po to, aby znalezc obiekt po tekscie
         agent.speed = 3.5f; 
         Target = GameObject.Find(TargetName.text);
-        Target = Target.transform.GetChild(1).gameObject;
+
+        //To comment this line
+        Target = Target.transform.GetChild(0).gameObject;
         agent.SetDestination(Target.transform.position);
         
 
@@ -154,11 +157,13 @@ public class StudentWalking : MonoBehaviour
 
 
         var _TempCurrentPosition = GameObject.Find(CurrentPositionDropdown.options[CurrentPositionDropdown.value].text);
-        this.transform.position = _TempCurrentPosition.transform.GetChild(1).gameObject.transform.position;
-      //   agent.speed = 100.0f;
-       //  agent.SetDestination(_TempCurrentPosition.transform.GetChild(1).gameObject.transform.position);
+       
+         this.transform.position = _TempCurrentPosition.transform.GetChild(0).gameObject.transform.position;
+        // this.transform.position = _TempCurrentPosition.transform.position;
+        //   agent.speed = 100.0f;
+        //  agent.SetDestination(_TempCurrentPosition.transform.GetChild(1).gameObject.transform.position);
 
-         
+
 
 
     }

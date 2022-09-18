@@ -123,7 +123,10 @@ public class OnClickEvent : MonoBehaviour
     {
        
         ClickedRoom.GetComponent<MeshRenderer>().material = NotClickedMaterial;
+
+        //To comment this line
         RoomDestination = ClickedRoom.transform.GetChild(1).gameObject;
+        RoomDestination = ClickedRoom;
         UiSelectedText.text = ClickedRoom.name;
         ClickedRoom.GetComponent<MeshRenderer>().material = ClickedMaterial;
 
