@@ -7,7 +7,25 @@ using UnityEngine.EventSystems;
 
 public class OnClickEvent : MonoBehaviour
 {
-    // Start is called before the first frame update
+  
+    //Deklaracja Materiałów
+    public Material ClickedMaterial;
+    public Material NotClickedMaterial;
+      
+    //Deklaracja obiektów i zmiennych na scenie
+    public GameObject ClickedRoom;
+    public bool isClicked;
+    public Text UiSelectedText;
+
+    public GameObject RoomDestination;
+
+    //Deklaracja elementu UI aktywowanego po kliknieciu 
+    public GameObject NavigationUI;
+
+    //Deklaracja list rozwijalnych
+    public Dropdown MyLocalisationDropdown;
+    public Dropdown TargetLocalisationDropdown;
+
     void Start()
     {
         isClicked = false;
@@ -20,65 +38,25 @@ public class OnClickEvent : MonoBehaviour
 
         if (UiSelectedText == null)
             throw new InvalidOperationException("You Did not set which text to change inspector");
-
-
-
     }
 
     
 
-
-    
-
-
-    //TODO - make exception to set objects in inspector 
-
-    public Material ClickedMaterial;
-    public Material NotClickedMaterial;
-    //materialy     
-
-
-    public GameObject ClickedRoom;
-    public bool isClicked;
-    public Text UiSelectedText;
-
-    public GameObject RoomDestination;
-
-
-    //deklaracja elementu UI aktywowanego po kliknieciu 
-    public GameObject NavigationUI;
-
-
-
-
-
-
- 
-
-
     void Update()
-    // Update is called once per frame
     {
         if (Input.GetMouseButtonDown(0))
         {
-
-            //Deklaracja Raycasta
+            //Deklaracja promienia typu raycast
             RaycastHit hitInfo = new RaycastHit();
             bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);
-            //
 
-            //Sprawdzenie warunku czy uderzyl
+            //Sprawdzenie trafienia za pomocą warunku
             if (hit && !EventSystem.current.IsPointerOverGameObject())
             {
-
-
-
-                //Czy cos jest klikniete na mapie, jezeli tak, to zmien material kliknietego obiektu
+                //Sprawdzenie warunku, czy coś jest wybrane na mapie i zmiana materiałów pokoi oraz chowanie interfejsu użytkownika
                 if (isClicked == true && hitInfo.transform.gameObject.tag == "Room")
                 {
                     ClickedRoom.GetComponent<MeshRenderer>().material = NotClickedMaterial;
-
-                        
 
                 }
                 else if (hitInfo.transform.gameObject.tag == "Background" )
@@ -88,32 +66,17 @@ public class OnClickEvent : MonoBehaviour
                     NavigationUI.SetActive(false);
                 }
 
-
-
-
-
-
-
-                //Jezeli tag obiektu to pokoj - zmien jego material na czerwony
-
+                //Jezeli tag obiektu jest odpowiedni, zmień jego material na czerwony
                 if (hitInfo.transform.gameObject.tag == "Room")
                 {
 
                     ClickedRoom = hitInfo.transform.gameObject;
                     SelectRoom();
-
-
-                    //Zmien opcje isClicked na true powodujac, ze cos jest klikniete na mapie
+                    //Zmiana zmiennej odpowiadającej za sprawdzenie, czy coś jest wybrane na mapie
                     isClicked = true;
                     NavigationUI.SetActive(true);
-
-
-
-                    //Debug.Log("Hit " + hitInfo.transform.gameObject.name);
+                    Debug.Log("Hit " + hitInfo.transform.gameObject.name);
                 }
-
-
-
             }
         }
 
@@ -121,36 +84,16 @@ public class OnClickEvent : MonoBehaviour
 
     public void SelectRoom()
     {
-       
         ClickedRoom.GetComponent<MeshRenderer>().material = NotClickedMaterial;
-
         //To comment this line
-        RoomDestination = ClickedRoom.transform.GetChild(1).gameObject;
+        RoomDestination = ClickedRoom.transform.GetChild(0).gameObject;
         RoomDestination = ClickedRoom;
         UiSelectedText.text = ClickedRoom.name;
         ClickedRoom.GetComponent<MeshRenderer>().material = ClickedMaterial;
-
-
-
     }
 
-
-
-
-    // selecting target from dropdown
-    public Dropdown MyLocalisationDropdown;
-    public Dropdown TargetLocalisationDropdown;
-
-
-
-
     public void SelectTarget()
-
-
-
     {
-
-
         if (ClickedRoom != null)
         {
             ClickedRoom.GetComponent<MeshRenderer>().material = NotClickedMaterial;
@@ -159,19 +102,6 @@ public class OnClickEvent : MonoBehaviour
         UiSelectedText.text = tempTargetText;
         ClickedRoom = GameObject.Find(TargetLocalisationDropdown.options[TargetLocalisationDropdown.value].text);
         SelectRoom();
-
-
-
-        //wywolac metode selectroom
-
-
-
-
-
-
     }
-
-
-
 
 }
