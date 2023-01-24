@@ -12,18 +12,18 @@ public class RoomInitializer : MonoBehaviour
     
     void Start()
     {
-        //Wyczyszczenie opcji w liście rozwijalnej
+        //Clearing options in dropdown
         roomDropdown.ClearOptions();
-        //Znalezienie wszystkich obiektów z tagiem pokój i utworzenie nowego elementu listy
+        //Putting in list all objects with "Room" tag
         RoomArray = GameObject.FindGameObjectsWithTag("Room");
         List<string> RoomList = new List<string>();
 
-        //Dodanie nazw pokojów do listy
+        //Adding Room names to list
         foreach (GameObject room in GameObject.FindGameObjectsWithTag("Room"))
         {
             RoomList.Add(room.name);
         }
-        //Dodanie pokojów do listy rozwijalnej i odświeżenie jej wartości
+        //Adding list of rooms to dropdown and refreshing its value
         roomDropdown.AddOptions(RoomList);
         roomDropdown.RefreshShownValue();
 

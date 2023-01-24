@@ -7,25 +7,21 @@ using UnityEngine.EventSystems;
 
 public class OnClickEvent : MonoBehaviour
 {
-  
-    //Deklaracja Materiałów
+    //Variables for materials
     public Material ClickedMaterial;
-    public Material NotClickedMaterial;
-      
-    //Deklaracja obiektów i zmiennych na scenie
+    public Material NotClickedMaterial;     
+    //Objects and variables used on scene
     public GameObject ClickedRoom;
     public bool isClicked;
     public Text UiSelectedText;
-
     public GameObject RoomDestination;
 
-    //Deklaracja elementu UI aktywowanego po kliknieciu 
+    //UI Navigation object (Canvas)
     public GameObject NavigationUI;
 
-    //Deklaracja list rozwijalnych
+    //Variables for dropdowns
     public Dropdown MyLocalisationDropdown;
     public Dropdown TargetLocalisationDropdown;
-
     void Start()
     {
         isClicked = false;
@@ -40,58 +36,53 @@ public class OnClickEvent : MonoBehaviour
             throw new InvalidOperationException("You Did not set which text to change inspector");
     }
 
-    
-
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            //Deklaracja promienia typu raycast
+            //Raycast declaration
             RaycastHit hitInfo = new RaycastHit();
             bool hit = Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitInfo);
-
-            //Sprawdzenie trafienia za pomocą warunku
+            //Checking if hit
             if (hit && !EventSystem.current.IsPointerOverGameObject())
             {
-                //Sprawdzenie warunku, czy coś jest wybrane na mapie i zmiana materiałów pokoi oraz chowanie interfejsu użytkownika
+                //Checking what is hit and hiding UI and changing room materials
                 if (isClicked == true && hitInfo.transform.gameObject.tag == "Room")
                 {
                     ClickedRoom.GetComponent<MeshRenderer>().material = NotClickedMaterial;
-
                 }
-                else if (hitInfo.transform.gameObject.tag == "Background" )
+                else if (hitInfo.transform.gameObject.tag == "Background")
                 {
                     ClickedRoom.GetComponent<MeshRenderer>().material = NotClickedMaterial;
                     isClicked = false;
                     NavigationUI.SetActive(false);
                 }
 
-                //Jezeli tag obiektu jest odpowiedni, zmień jego material na czerwony
+                //Changing materials if raycast hits room
                 if (hitInfo.transform.gameObject.tag == "Room")
                 {
-
                     ClickedRoom = hitInfo.transform.gameObject;
                     SelectRoom();
-                    //Zmiana zmiennej odpowiadającej za sprawdzenie, czy coś jest wybrane na mapie
                     isClicked = true;
                     NavigationUI.SetActive(true);
                     Debug.Log("Hit " + hitInfo.transform.gameObject.name);
                 }
             }
         }
-
     }
 
+    //Method for changing destination
     public void SelectRoom()
     {
         ClickedRoom.GetComponent<MeshRenderer>().material = NotClickedMaterial;
-        //To comment this line
+        //To comment line below if not using locators
         RoomDestination = ClickedRoom.transform.GetChild(0).gameObject;
         RoomDestination = ClickedRoom;
         UiSelectedText.text = ClickedRoom.name;
         ClickedRoom.GetComponent<MeshRenderer>().material = ClickedMaterial;
     }
 
+    //Selecting target from dropdown
     public void SelectTarget()
     {
         if (ClickedRoom != null)
@@ -103,5 +94,4 @@ public class OnClickEvent : MonoBehaviour
         ClickedRoom = GameObject.Find(TargetLocalisationDropdown.options[TargetLocalisationDropdown.value].text);
         SelectRoom();
     }
-
 }

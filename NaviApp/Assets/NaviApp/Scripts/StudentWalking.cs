@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class StudentWalking : MonoBehaviour
 {
-    //Deklaracja zmiennych
+    //Variable delcaration
     public GameObject Navigator;
     public LineRenderer StudentPath;
     public GameObject Target;
@@ -15,7 +15,6 @@ public class StudentWalking : MonoBehaviour
     private UnityEngine.AI.NavMeshAgent agent;
     OnClickEvent NavigatorScript;
     public bool isDoneMoving;
-
 
     void Start()
     {
@@ -26,13 +25,10 @@ public class StudentWalking : MonoBehaviour
         {
             throw new InvalidOperationException("You Did not set proper script reference (also can be done by injecting OnClickEvent script to student)");
         }
-  
         isDoneMoving = false;
-
     }
 
-
-
+    
     void Update()
     {
         if (this.transform.position.x == Target.transform.position.x && this.transform.position.z == Target.transform.position.z )
@@ -49,7 +45,7 @@ public class StudentWalking : MonoBehaviour
         }
     }
 
-    //Metoda zatrzymująca pionek
+    //Method using to stop pawn while showing path
     public void StudentShowPath()
     {
         agent.speed = 0.0f;
@@ -58,7 +54,7 @@ public class StudentWalking : MonoBehaviour
         agent.SetDestination(Target.transform.position);
     }
 
-    //Metoda odpowiadająca za ruch pionka
+    //Method moving navigation pawn
     public void StudentMove()
     {
         agent.speed = 3.5f; 
@@ -67,13 +63,12 @@ public class StudentWalking : MonoBehaviour
         agent.SetDestination(Target.transform.position);    
     }
 
-    //Metoda Rysująca linie, po której porusza się pionek
+    //Method drawing line that moves the pawn
     void DrawLine()
     {
-
         if (agent == null || agent.path == null)
             return;
- 
+
         if (StudentPath == null)
         {
             StudentPath = this.gameObject.AddComponent<LineRenderer>();
@@ -81,7 +76,6 @@ public class StudentWalking : MonoBehaviour
             StudentPath.startWidth = 0.5f;
             StudentPath.endWidth = 0.5f;
         }
-
         var path = agent.path;
         StudentPath.positionCount = path.corners.Length;
         for (int i = 0; i < path.corners.Length; i++)
@@ -90,22 +84,21 @@ public class StudentWalking : MonoBehaviour
         }
     }
 
-
     public Dropdown CurrentPositionDropdown;
     public float smoothTime = 0.3F;
-    private Vector3 velocity = Vector3.zero;
-    
-    //Zmiana pozycji pionka, w zależności od wyboru użytkownika z listy rozwijalnej
+    private Vector3 velocity = Vector3.zero;    
+    //Changing navigation pawn position based on option selected from dropdown
     public void SelectedPositionUpdate()
     {
-
-        var _TempCurrentPosition = GameObject.Find(CurrentPositionDropdown.options[CurrentPositionDropdown.value].text);
-       
+        var _TempCurrentPosition = GameObject.Find(CurrentPositionDropdown.options[CurrentPositionDropdown.value].text);     
          this.transform.position = _TempCurrentPosition.transform.GetChild(0).gameObject.transform.position;
-
     }
-
 }
+
+
+
+
+
 // this.transform.position = _TempCurrentPosition.transform.position;
 //   agent.speed = 100.0f;
 //  agent.SetDestination(_TempCurrentPosition.transform.GetChild(1).gameObject.transform.position);
